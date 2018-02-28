@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MENUS, MenuItem } from './app.menu.config';
-
+//import { CONF } from './app.global.config';
 
 @Component({
   templateUrl: 'app.html'
