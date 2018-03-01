@@ -31,5 +31,5 @@ import { MODULES, PROVIDERS,NATIVE_PROVIDERS,CONF} from './app.imports.dev';
 })
 export class AppModule { }
 
-export {CONF as CONF}
+export {CONF as APPCONF}
 // export {AppConfig as AppConfig}

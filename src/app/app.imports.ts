@@ -41,7 +41,7 @@ export const PROVIDERS = [
   //   CameraProvider,
   //   NativeGoogleMapsProvider,
 
-  
+
 ];
 export const NATIVE_PROVIDERS =[
   // Ionic native specific providers
@@ -71,9 +71,13 @@ export const DIRECTIVES = [
 export interface AppConfig {
   serverUrl: string;
   serverToken: string;
+  homePageName: string;
+  loginPageName: string;
 };
 
-export const CONF: AppConfig = { 
+export const CONF: AppConfig = {
   serverUrl: 'http://198.10.1.237:8080/WinterSpring/apis',
-  serverToken: 'auth_token'
+  serverToken: 'auth_token',
+  homePageName:'HomePage',
+  loginPageName:'LoginOnePage'
 };

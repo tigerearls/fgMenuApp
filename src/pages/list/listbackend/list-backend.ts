@@ -24,26 +24,39 @@ export class ListBackendPage {
 
     this.items = [];
 
-    this.httpUtils.getAuthHeader().then(
-      headers => {
-        //console.log(headers);
-        let url=httpUtils.serverUrl() + '/demo/list';
-        http.get<EasyUIResult<DemoTab1>>(url,{headers:headers})
-          .subscribe((result: EasyUIResult<DemoTab1>) => {
 
-            for (const val of result.rows) {
-              this.items.push({
-                title: 'ID ' + val.auto_id,
-                note: '' + val.dm_str,
-                icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-              });
-            }
-          }
-          , httpUtils.errFunc
-
-          );
+    this.httpUtils.getWithAuth<EasyUIResult<DemoTab1>>('/demo/list').then(
+      (result: EasyUIResult<DemoTab1>)=>{
+        for (const val of result.rows) {
+          this.items.push({
+            title: 'ID ' + val.auto_id,
+            note: '' + val.dm_str,
+            icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+          });
+        }
       }
     );
+
+    // this.httpUtils.getAuthHeader().then(
+    //   headers => {
+    //     //console.log(headers);
+    //     let url=httpUtils.serverUrl() + '/demo/list';
+    //     http.get<EasyUIResult<DemoTab1>>(url,{headers:headers})
+    //       .subscribe((result: EasyUIResult<DemoTab1>) => {
+
+    //         for (const val of result.rows) {
+    //           this.items.push({
+    //             title: 'ID ' + val.auto_id,
+    //             note: '' + val.dm_str,
+    //             icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+    //           });
+    //         }
+    //       }
+    //       , httpUtils.errFunc
+
+    //       );
+    //   }
+    // );
 
   }
 

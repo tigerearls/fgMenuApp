@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MENUS, MenuItem } from './app.menu.config';
-//import { CONF } from './app.global.config';
+import { APPCONF } from "./app.module";
 
 @Component({
   templateUrl: 'app.html'
@@ -12,7 +12,7 @@ import { MENUS, MenuItem } from './app.menu.config';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'HomePage';
+  rootPage: any = APPCONF.homePageName;
 
   // pages: Array<{title: string, component: any}>;
   pages: Array<MenuItem>;
