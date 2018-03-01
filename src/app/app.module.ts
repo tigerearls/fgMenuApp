@@ -9,7 +9,7 @@ import { MyApp } from './app.component';
 // import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { MODULES, PROVIDERS } from './app.imports';
+import { MODULES, PROVIDERS,NATIVE_PROVIDERS,CONF} from './app.imports.dev';
 @NgModule({
   declarations: [
     MyApp
@@ -25,7 +25,11 @@ import { MODULES, PROVIDERS } from './app.imports';
   ],
   providers: [
     PROVIDERS,
+    NATIVE_PROVIDERS,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }
+
+export {CONF as CONF}
+// export {AppConfig as AppConfig}

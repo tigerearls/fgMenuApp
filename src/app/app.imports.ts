@@ -1,6 +1,7 @@
 
 
 // Providers
+import { HttpUtils } from '../providers/util/http.provider';
 // import { ToastService } from '../providers/util/toast.service';
 // import { AlertService } from '../providers/util/alert.service';
 // import { CameraProvider } from '../providers/util/camera.provider';
@@ -27,31 +28,52 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 export const MODULES = [
-//   SwingModule,
+  //   SwingModule,
   BrowserModule,
   HttpClientModule,
 ];
 
 export const PROVIDERS = [
-//   AlertService,
-//   ToastService,
-//   AppState,
-//   CameraProvider,
-//   NativeGoogleMapsProvider,
+  HttpUtils,
+  //   AlertService,
+  //   ToastService,
+  //   AppState,
+  //   CameraProvider,
+  //   NativeGoogleMapsProvider,
 
+  
+];
+export const NATIVE_PROVIDERS =[
   // Ionic native specific providers
-//   BarcodeScanner,
-//   Camera,
-//   Diagnostic,
-//   Geolocation,
-//   CardIO,
+  //   BarcodeScanner,
+  //   Camera,
+  //   Diagnostic,
+  //   Geolocation,
+  //   CardIO,
   StatusBar,
   SplashScreen,
-  SecureStorage, 
-//   GoogleMaps,
+  SecureStorage,
+  //   GoogleMaps,
 ];
 
 export const DIRECTIVES = [
-//   SlidingDrawer,
-//   Autosize,
+  //   SlidingDrawer,
+  //   Autosize,
 ];
+
+
+
+/**
+ * 全局参数配置
+ *
+ * @XU
+ */
+export interface AppConfig {
+  serverUrl: string;
+  serverToken: string;
+};
+
+export const CONF: AppConfig = { 
+  serverUrl: 'http://198.10.1.237:8080/WinterSpring/apis',
+  serverToken: 'auth_token'
+};

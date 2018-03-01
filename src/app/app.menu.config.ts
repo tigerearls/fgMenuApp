@@ -12,7 +12,7 @@ export interface MenuItem {
 
 export const MENUS:Array<MenuItem> = [
   { title: '首页', component: 'HomePage', active: true, icon: 'home' },
-  { title: '登录', component: 'LoginListPage', active: false, icon: 'archive' },
+  { title: '登录', component: 'LoginOnePage', active: false, icon: 'archive' },
   { title: '列表', component: 'ListPage', active: false, icon: 'body' },
-  { title: '远程列表', component: 'ListDemoPage', active: false, icon: 'body' },
+  { title: '远程列表', component: 'ListBackendPage', active: false, icon: 'body' },
 ];
