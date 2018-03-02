@@ -1,9 +1,11 @@
+
 // import { FormBuilder, FormControl, Validator } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AlertController, LoadingController, IonicPage } from 'ionic-angular';
+import { ToastController , LoadingController, IonicPage } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { HttpUtils ,Msg} from '../../../providers/util/http.provider';
-import { HttpResponse } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { HttpUtils, Msg } from '../../../providers/util/http.provider';
+
 @IonicPage()
 @Component({
   selector: 'page-login-one',
@@ -16,14 +18,14 @@ export class LoginOnePage {
 
   constructor(
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
+    public toastCtrl : ToastController ,
     private formBuilder: FormBuilder,
     private httpUtils: HttpUtils
   ) {
 
-    this.form=this.formBuilder.group({
-      username:['',[Validators.required]],
-      password:['',[Validators.required]]
+    this.form = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -33,22 +35,29 @@ export class LoginOnePage {
     });
 
     loading.onDidDismiss(() => {
-      this.httpUtils.postNoAuth<HttpResponse<Msg>>("/login?remember-me=true",user).then(
-        response=>{
-          let msg=response.body;
-          if(msg.success){
-            console.log(response.headers.get("Set-cookie"))
-          }else{
+      this.httpUtils.postNoAuth("/login", null,
+        new HttpParams()
+          .set("remember-me", "true")
+          .set("username", user.username)
+          .set("password", user.password)
+      )
+        .then((msg: Msg) => {
 
+          if (msg.success) {
+            this.httpUtils.storeAuthToken(msg.backParam);
+            this.httpUtils.navHomePage();
+          } else {
+            let toast = this.toastCtrl.create({
+              message: msg.msg,
+              cssClass:"dangerToast",
+              // showCloseButton:true
+              duration: 4000
+            });
+            toast.present();
           }
-        }
-      );
-      // const alert = this.alertCtrl.create({
-      //   title: 'Logged in!',
-      //   subTitle: 'Thanks for logging in.',
-      //   buttons: ['Dismiss']
-      // });
-      // alert.present();
+        });
+
+        
     });
 
     loading.present();
