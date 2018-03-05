@@ -15,7 +15,7 @@ import { HttpUtils } from '../providers/util/http.provider';
 // import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { SecureStorage } from '@ionic-native/secure-storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 // import { GoogleMaps } from '@ionic-native/google-maps';
 
 // Directives
@@ -52,7 +52,7 @@ export const NATIVE_PROVIDERS =[
   //   CardIO,
   StatusBar,
   SplashScreen,
-  SecureStorage,
+  NativeStorage,
   //   GoogleMaps,
 ];
 
