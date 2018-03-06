@@ -25,20 +25,22 @@ export class ListDemoPage {
     this.items = [];
 
 
-    this.httpUtils.getAuthHeader().then(
-      headers => {
+ 
         //console.log(headers);
-        let url=httpUtils.serverUrl() + '/demo/list';
-        http.get(url,{headers:headers,observe:'response',responseType:"text"})
+        // let url=httpUtils.serverUrl() + '/demo/list';
+        // http.get(url,{observe:'response'})
           
-          .subscribe((resp) => {
-            console.log(resp);
-          }
+        //   .subscribe((resp) => {
+        //     console.log(resp);
+        //   }
           
 
-          );
-      }
-    );
+        //   );
+
+        httpUtils.getNoAuth('/demo/list').then(data=>{
+          console.log(data);
+        });
+   
 
   }
 

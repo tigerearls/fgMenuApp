@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { HttpUtils, EasyUIResult } from '../../../providers/util/http.provider';
 
 @IonicPage()
@@ -8,10 +8,14 @@ import { HttpUtils, EasyUIResult } from '../../../providers/util/http.provider';
   selector: 'page-list',
   templateUrl: 'list-backend.html'
 })
+
 export class ListBackendPage {
   selectedItem: any;
   icons: string[];
   items: Array<{ title: string, note: string, icon: string }>;
+  limit: number = 14;
+  offset: number = 0;
+  total: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public http: HttpClient, private httpUtils: HttpUtils) {
@@ -24,9 +28,16 @@ export class ListBackendPage {
 
     this.items = [];
 
+    this.loadList(this.offset);
 
-    this.httpUtils.getWithAuth<EasyUIResult<DemoTab1>>('/demo/list').then(
-      (result: EasyUIResult<DemoTab1>)=>{
+
+
+  }
+
+  loadList(newoffset: number = 0): Promise<any> {
+    return this.httpUtils.getWithAuth<EasyUIResult<DemoTab1>>('/demo/list?offset=' + newoffset + "&limit=" + this.limit).then(
+      (result: EasyUIResult<DemoTab1>) => {
+        this.total = result.total;
         for (const val of result.rows) {
           this.items.push({
             title: 'ID ' + val.auto_id,
@@ -36,28 +47,6 @@ export class ListBackendPage {
         }
       }
     );
-
-    // this.httpUtils.getAuthHeader().then(
-    //   headers => {
-    //     //console.log(headers);
-    //     let url=httpUtils.serverUrl() + '/demo/list';
-    //     http.get<EasyUIResult<DemoTab1>>(url,{headers:headers})
-    //       .subscribe((result: EasyUIResult<DemoTab1>) => {
-
-    //         for (const val of result.rows) {
-    //           this.items.push({
-    //             title: 'ID ' + val.auto_id,
-    //             note: '' + val.dm_str,
-    //             icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-    //           });
-    //         }
-    //       }
-    //       , httpUtils.errFunc
-
-    //       );
-    //   }
-    // );
-
   }
 
   itemTapped(event, item) {
@@ -66,9 +55,36 @@ export class ListBackendPage {
       item: item
     });
   }
+
+  doRefresh(event) {
+    this.items = [];
+    this.loadList(this.offset).then(
+      data => {
+        event.complete();
+      }, error => {
+        event.complete();
+      }
+    );
+
+  }
+
+  doInfinite(event) {
+    if (this.total > this.items.length) {
+      this.loadList(this.offset + this.limit).then(
+        data => {
+          event.complete();
+        }, error => {
+          event.complete();
+        }
+      );
+    } else {
+      event.complete();
+      event.enable(false);
+    }
+  }
 }
 
 declare class DemoTab1 {
   auto_id: String;
-  dm_str:  String;
+  dm_str: String;
 }

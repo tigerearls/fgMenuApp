@@ -1,5 +1,5 @@
 // import { PipesModule } from '../pipes/pipes.module';
-// import { ComponentsModule } from '../components/components.module';
+import { ComponentsModule } from '../components/components.module';
 import { DIRECTIVES } from './app.imports';
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
@@ -11,7 +11,7 @@ import { IonicModule } from 'ionic-angular';
   imports: [
     IonicModule,
     // PipesModule,
-    // ComponentsModule,
+    ComponentsModule,
   ],
   exports: [
     // ComponentsModule,

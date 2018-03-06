@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { NavController, App } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams ,HttpErrorResponse} from "@angular/common/http";
 import { APPCONF } from "./../../app/app.module";
 
 
@@ -62,8 +62,7 @@ export class HttpUtils {
                             res(data);
                         })
                         .catch(err => {
-                            this.errFunc(err);
-                            rej(err);
+                            this.commonErr(err,rej);
                         });
                 })
                 .catch(err => {
@@ -81,8 +80,7 @@ export class HttpUtils {
                     res(data);
                 })
                 .catch(err => {
-                    this.errFunc(err);
-                    rej(err);
+                    this.commonErr(err,rej,false);
                 });
         });
     }
@@ -97,8 +95,7 @@ export class HttpUtils {
                             res(data);
                         })
                         .catch(err => {
-                            this.errFunc(err);
-                            rej(err);
+                            this.commonErr(err,rej);
                         });
                 })
                 .catch(err => {
@@ -116,8 +113,7 @@ export class HttpUtils {
                     res(data);
                 })
                 .catch(err => {
-                    this.errFunc(err);
-                    rej(err);
+                    this.commonErr(err,rej,false);
                 });
         });
     }
@@ -131,16 +127,24 @@ export class HttpUtils {
         return APPCONF.serverUrl;
     }
 
-    public errFunc(err): void {
-        console.log(
-                `Backend returned code ${err.status}, body was: ${err.error}`);
+
+    private commonErr(err,promiseRej,dealFlag:boolean=true){
+        console.error("http error",err);
+        if(err instanceof HttpErrorResponse && dealFlag){
+            if(err.headers.has("no_auth"))this.navLoginPage();
+            else promiseRej(err);
+        }else{
+            promiseRej(err);
+        }
+        
+
     }
         
 }
 
 
 export class EasyUIResult<T> {
-    total: Number;
+    total: number;
     rows: Array<T>;
     footer: Array<T>;
 }

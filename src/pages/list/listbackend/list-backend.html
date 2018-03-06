@@ -3,11 +3,19 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>列表X</ion-title>
+    <ion-title>远程列表</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="加载中....">
+        </ion-refresher-content>
+      </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-start></ion-icon>
@@ -18,6 +26,13 @@
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+      You navigated here from <b>{{selectedItem.title}}</b>
+    </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载更多数据.."
+      ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
 </ion-content>

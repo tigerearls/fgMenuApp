@@ -27,7 +27,7 @@ const DEV_NATIVE_PROVIDERS = [
     {provide:NativeStorage,useClass: MockNativeStorage}
 ]
 const DEV_CONF:AppConfig = Object.assign({},CONF,{
-    serverUrl: 'http://127.0.0.1:8080/WinterSpring/apis'
+    serverUrl: '/apis'
 });
 export { MODULES };
 export { PROVIDERS };
