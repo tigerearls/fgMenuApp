@@ -86,3 +86,10 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+
+.dangerToast .toast-container{
+  background-color: map-get($colors,'danger');
+  text-align: center;
+}

@@ -1,8 +1,14 @@
 {
-  "name": "fgMenuApp",
+  "name": "菜单测试",
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   }
+  ,"proxies": [
+    {
+      "path": "/apis",
+      "proxyUrl": "http://127.0.0.1:8080/WinterSpring/apis"
+    }
+  ]
 }

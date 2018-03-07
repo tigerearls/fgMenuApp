@@ -1,0 +1,43 @@
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img class="logo" src="assets/imgs/logo/logo-mailchimp.png" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="form">
+          <ion-list inset class="no-border">
+            <ion-item>
+              <ion-label>用户名：</ion-label>
+              <ion-input type="text" formControlName="username"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button class="login-button" (click)="login(form.value)" [disabled]="!form.valid">登&nbsp;&nbsp;录</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div (click)="goToResetPassword()">
+          <span>忘记密码</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
+  <div class="logo">
+    <span>江苏同达科技有限责任公司</span>
+  </div>
+</ion-content>
