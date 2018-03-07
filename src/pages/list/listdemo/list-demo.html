@@ -16,7 +16,9 @@
         {{item.note}}
       </div>
     </button>
+    
   </ion-list>
+  <error-view [status]="status"></error-view>
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
   </div>

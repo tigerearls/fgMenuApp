@@ -14,7 +14,7 @@ import { IonicModule } from 'ionic-angular';
     ComponentsModule,
   ],
   exports: [
-    // ComponentsModule,
+    ComponentsModule,
     // PipesModule,
   ]
 })

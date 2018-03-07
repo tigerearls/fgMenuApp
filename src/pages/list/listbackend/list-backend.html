@@ -25,9 +25,11 @@
       </div>
     </button>
   </ion-list>
+  
   <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title}}</b>
     </div>
+  <error-view></error-view> 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
       loadingSpinner="bubbles"

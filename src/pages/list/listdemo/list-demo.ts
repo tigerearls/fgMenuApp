@@ -12,7 +12,7 @@ export class ListDemoPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
-
+  status:number;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient
   ,private httpUtils:HttpUtils) {
     // If we navigated to this page, we will have an item available as a nav param
@@ -39,6 +39,9 @@ export class ListDemoPage {
 
         httpUtils.getNoAuth('/demo/list').then(data=>{
           console.log(data);
+        }).catch(err=>{
+          console.log("error");
+          this.status=500;
         });
    
 
