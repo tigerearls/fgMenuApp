@@ -1,3 +1,4 @@
+import { StatusBar } from '@ionic-native/status-bar';
 
 // import { FormBuilder, FormControl, Validator } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -8,10 +9,10 @@ import { HttpUtils, Msg } from '../../../providers/util/http.provider';
 
 @IonicPage()
 @Component({
-  selector: 'page-login-one',
-  templateUrl: 'login-one.html',
+  selector: 'page-login',
+  templateUrl: 'login.html',
 })
-export class LoginOnePage {
+export class LoginPage {
 
   public form: any;
   public backgroundImage = 'assets/imgs/background/background-5.jpg';
@@ -19,7 +20,7 @@ export class LoginOnePage {
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl : ToastController ,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder, 
     private httpUtils: HttpUtils
   ) {
 
@@ -55,6 +56,14 @@ export class LoginOnePage {
             });
             toast.present();
           }
+        }).catch(err=>{
+          let toast = this.toastCtrl.create({
+            message: err.status+"错误",
+            cssClass:"dangerToast",
+            // showCloseButton:true
+            duration: 4000
+          });
+          toast.present();
         });
 
         

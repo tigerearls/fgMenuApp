@@ -79,5 +79,5 @@ export const CONF: AppConfig = {
   serverUrl: 'http://198.10.1.237:8080/WinterSpring/apis',
   serverToken: 'auth_token',
   homePageName:'HomePage',
-  loginPageName:'LoginOnePage'
+  loginPageName:'LoginPage'
 };
