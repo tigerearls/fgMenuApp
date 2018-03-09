@@ -26,11 +26,13 @@ import { NativeStorage } from '@ionic-native/native-storage';
 // import { SwingModule } from 'angular2-swing';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 export const MODULES = [
   //   SwingModule,
   BrowserModule,
   HttpClientModule,
+  FormsModule
 ];
 
 export const PROVIDERS = [

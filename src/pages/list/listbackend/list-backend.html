@@ -1,40 +1,37 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>远程列表</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>远程列表</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="itemAdd()">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-buttons>
+      </ion-navbar>
+  
 </ion-header>
 
 <ion-content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content
-          pullingIcon="arrow-dropdown"
-          pullingText="下拉刷新"
-          refreshingSpinner="circles"
-          refreshingText="加载中....">
-        </ion-refresher-content>
-      </ion-refresher>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中....">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
+      ID {{item.auto_id}}
       <div class="item-note" item-end>
-        {{item.note}}
+        {{item.dm_str}}
       </div>
     </button>
   </ion-list>
-  
-  <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title}}</b>
-    </div>
-  <error-view></error-view> 
+
+  <error-view [status]="status"></error-view>
+
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="加载更多数据.."
-      ></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多数据.."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  
+
 </ion-content>
