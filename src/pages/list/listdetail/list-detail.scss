@@ -1,5 +1,12 @@
 page-list{
     ion-input .text-input{
-        //text-align: right;
+        text-align: right;
+        // align-items: flex-end
+    }
+    .input-md[clearInput] .text-input {
+        padding-right: 0px;
+    }
+    .input-md[clearInput] .text-input:focus {
+        padding-right: 30px;
     }
 }

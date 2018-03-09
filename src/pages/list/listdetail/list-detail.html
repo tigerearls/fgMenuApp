@@ -12,32 +12,32 @@
     <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
         <ion-list>
             <ion-item>
-                <ion-label fixed>DM_UID：</ion-label>
+                <ion-label >DM_UID：</ion-label>
                 <ion-input type="text" [(ngModel)]="model.dm_uid" name="dm_uid" required clearInput></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label fixed>DM_STR：</ion-label>
+                <ion-label >DM_STR：</ion-label>
                 <ion-select [(ngModel)]="model.dm_str" name="dm_str" required interface="action-sheet" cancelText="取消">
                     <ion-option *ngFor="let selectOption of mySelectOptions" [value]="selectOption.value">{{selectOption.text}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label fixed>DM_NUM：</ion-label>
+                <ion-label >DM_NUM：</ion-label>
                 <ion-input type="number" [(ngModel)]="model.dm_num" name="dm_num" required></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label fixed>DM_INT：</ion-label>
+                <ion-label >DM_INT：</ion-label>
                 <ion-input type="number" [ngModel]="model.dm_int" name="dm_int" required readonly></ion-input>
             </ion-item>
             <ion-item>
                 <ion-range [(ngModel)]="model.dm_int" pin="true" name="dm_int"></ion-range>
             </ion-item>
             <ion-item>
-                <ion-label fixed>DM_DATE:</ion-label>
+                <ion-label >DM_DATE:</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="model.dm_date" name="dm_date" cancelText="取消" doneText="确认"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label fixed>DM_TIME:</ion-label>
+                <ion-label >DM_TIME:</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" [(ngModel)]="model.dm_time" name="dm_time" cancelText="取消" doneText="确认"></ion-datetime>
             </ion-item>
         </ion-list>

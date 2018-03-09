@@ -1,9 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, InfiniteScroll } from 'ionic-angular';
-import { HttpUtils, EasyUIResult } from '../../../providers/util/http.provider';
-
-
-
+import { IonicPage, NavController, NavParams, InfiniteScroll, ToastController } from 'ionic-angular';
+import { HttpUtils, EasyUIResult, Msg } from '../../../providers/util/http.provider';
 
 @IonicPage()
 @Component({
@@ -24,7 +21,7 @@ export class ListBackendPage {
   total: number;
   status: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl : ToastController,
     private httpUtils: HttpUtils) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
@@ -67,11 +64,34 @@ export class ListBackendPage {
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push('ListDetailPage', {
-      item: item
+      item: Object.assign({},item)
     });
   }
   itemAdd(){
     this.navCtrl.push('ListDetailPage');
+  }
+  itemDel(event:Event,item:DemoTab1,index){
+    event.preventDefault();
+    this.httpUtils.postWithAuth<Msg>("/demo/del",{auto_id:item.auto_id}).then(msg=>{
+        if(msg.success)this.items.splice(index,1);
+        else {
+          let toast = this.toastCtrl.create({
+            message: msg.msg,
+            cssClass:"dangerToast",
+            duration: 4000
+          });
+          toast.present();
+        }
+    }).catch(err=>{
+      let toast = this.toastCtrl.create({
+        message: err.status+"错误",
+        cssClass:"dangerToast",
+        duration: 4000
+      });
+      toast.present();
+    });
+    
+
   }
   doRefresh(event) {
     this.initState();
